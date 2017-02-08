@@ -8,20 +8,35 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseDatabase
 
 class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     var activeField: UITextField?
     
+//    var signedInUser: FIRUser?
+//    var databaseUserReference: FIRDatabaseReference!
+var databaseUserReference: FIRDatabaseReference!
+    
     @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var userEmailLabel: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        databaseUserReference = FIRDatabase.database().reference().child("users")
+
+        do {
+            try FIRAuth.auth()?.signOut()
+            self.updateInterface()
+        }
+        catch {
+            print("Ugh \(error)")
+        }
+        
         registerForKeyboardNotifications()
         //self.updateInterface()
-
+        
         let _ = FIRAuth.auth()?.addStateDidChangeListener() { (auth, user) in
             self.updateInterface()
         }
@@ -113,6 +128,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
             FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (user: FIRUser?, error: Error?) in
                 if user != nil {
                     //self.updateInterface()
+                    self.createUserInDatabase(name: (user?.email)!)
+//                    self.signedInUser = user
+                    
+                    
+                    self.performSegue(withIdentifier: "signedIn", sender: sender)
                 }
                 else {
                     let alert = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
@@ -138,7 +158,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
             let password = passwordField.text {
             FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (user: FIRUser?, error: Error?) in
                 if user != nil {
+                    self.performSegue(withIdentifier: "signedIn", sender: sender)
                     //self.updateInterface()
+                    
                 }
                 else {
                     let alert = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
@@ -148,6 +170,21 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 }
             })
         }
+    }
+    
+    func createUserInDatabase(name: String) {
+        let newUser = User(name: name, profile: nil, photos: [], votes: [])
+        
+        let newUserRef = databaseUserReference.child("\(FIRAuth.auth()!.currentUser!.uid)")
+        
+        let newUserDetails: [String : AnyObject] = [
+            "name" : newUser.name as AnyObject,
+            "profile" : newUser.profile as AnyObject,
+            "photos" : newUser.photos as AnyObject,
+            "votes" : newUser.votes as AnyObject
+        ]
+        
+        newUserRef.setValue(newUserDetails)
     }
 }
 

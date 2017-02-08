@@ -12,7 +12,9 @@
 		1ECCA1D11E4245A700FF81C7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1ECCA1CF1E4245A700FF81C7 /* Main.storyboard */; };
 		1ECCA1D31E4245A700FF81C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1ECCA1D21E4245A700FF81C7 /* Assets.xcassets */; };
 		1ECCA1D61E4245A700FF81C7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1ECCA1D41E4245A700FF81C7 /* LaunchScreen.storyboard */; };
-		1ECCA1DE1E42464600FF81C7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1ECCA1DD1E42464600FF81C7 /* GoogleService-Info.plist */; };
+		9E119ED51E49172E0010C395 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9E119ED41E49172E0010C395 /* GoogleService-Info.plist */; };
+		9E119EE11E4939120010C395 /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E119EE01E4939120010C395 /* PhotoViewController.swift */; };
+		9E119EE31E4A501E0010C395 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E119EE21E4A501E0010C395 /* User.swift */; };
 		C6425394912C9F7052A88E23 /* Pods_FirebaseAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0869C4DAD6142F6B00CE3872 /* Pods_FirebaseAuthentication.framework */; };
 /* End PBXBuildFile section */
 
@@ -26,7 +28,9 @@
 		1ECCA1D21E4245A700FF81C7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1ECCA1D51E4245A700FF81C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1ECCA1D71E4245A700FF81C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1ECCA1DD1E42464600FF81C7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		9E119ED41E49172E0010C395 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		9E119EE01E4939120010C395 /* PhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
+		9E119EE21E4A501E0010C395 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C8EAF7EFAA7597F9B4D37807 /* Pods-FirebaseAuthentication.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseAuthentication.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseAuthentication/Pods-FirebaseAuthentication.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -63,13 +67,15 @@
 		1ECCA1CA1E4245A700FF81C7 /* FirebaseAuthentication */ = {
 			isa = PBXGroup;
 			children = (
+				9E119ED41E49172E0010C395 /* GoogleService-Info.plist */,
 				1ECCA1CB1E4245A700FF81C7 /* AppDelegate.swift */,
 				1ECCA1CD1E4245A700FF81C7 /* ViewController.swift */,
 				1ECCA1CF1E4245A700FF81C7 /* Main.storyboard */,
 				1ECCA1D21E4245A700FF81C7 /* Assets.xcassets */,
 				1ECCA1D41E4245A700FF81C7 /* LaunchScreen.storyboard */,
 				1ECCA1D71E4245A700FF81C7 /* Info.plist */,
-				1ECCA1DD1E42464600FF81C7 /* GoogleService-Info.plist */,
+				9E119EE01E4939120010C395 /* PhotoViewController.swift */,
+				9E119EE21E4A501E0010C395 /* User.swift */,
 			);
 			path = FirebaseAuthentication;
 			sourceTree = "<group>";
@@ -126,6 +132,7 @@
 				TargetAttributes = {
 					1ECCA1C71E4245A700FF81C7 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = RKDEZ4QK32;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -154,8 +161,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				1ECCA1D61E4245A700FF81C7 /* LaunchScreen.storyboard in Resources */,
-				1ECCA1DE1E42464600FF81C7 /* GoogleService-Info.plist in Resources */,
 				1ECCA1D31E4245A700FF81C7 /* Assets.xcassets in Resources */,
+				9E119ED51E49172E0010C395 /* GoogleService-Info.plist in Resources */,
 				1ECCA1D11E4245A700FF81C7 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -205,7 +212,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -215,8 +222,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E119EE31E4A501E0010C395 /* User.swift in Sources */,
 				1ECCA1CE1E4245A700FF81C7 /* ViewController.swift in Sources */,
 				1ECCA1CC1E4245A700FF81C7 /* AppDelegate.swift in Sources */,
+				9E119EE11E4939120010C395 /* PhotoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,9 +349,10 @@
 			baseConfigurationReference = C8EAF7EFAA7597F9B4D37807 /* Pods-FirebaseAuthentication.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = RKDEZ4QK32;
 				INFOPLIST_FILE = FirebaseAuthentication/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = nyc.c4q.FirebaseAuthentication;
+				PRODUCT_BUNDLE_IDENTIFIER = nyc.c4q.viczhong.FirebaseAuthentication;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -353,9 +363,10 @@
 			baseConfigurationReference = 08296D7DCC8E526B96735EF3 /* Pods-FirebaseAuthentication.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = RKDEZ4QK32;
 				INFOPLIST_FILE = FirebaseAuthentication/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = nyc.c4q.FirebaseAuthentication;
+				PRODUCT_BUNDLE_IDENTIFIER = nyc.c4q.viczhong.FirebaseAuthentication;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -380,6 +391,7 @@
 				1ECCA1DC1E4245A700FF81C7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

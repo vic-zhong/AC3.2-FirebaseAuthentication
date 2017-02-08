@@ -17,6 +17,7 @@ struct Photo {
     let votes: [Vote]
     let uploadedBy: String
     let date: String
+    let time: String
     let category: String
 }
 

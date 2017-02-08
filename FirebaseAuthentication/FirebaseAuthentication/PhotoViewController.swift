@@ -149,15 +149,18 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
         let dateStringFormatter = DateFormatter()
         dateStringFormatter.dateFormat = "yyyy-MM-dd"
         let dateString = dateStringFormatter.string(from: date)
-        
+        dateStringFormatter.dateFormat = "HH:mm:ss"
+        let timeString = dateStringFormatter.string(from: date)
         
         let uploadedPhoto = Photo(filePath: FIRAuth.auth()!.currentUser!.uid +
-            "/\(Int(Date.timeIntervalSinceReferenceDate * 1000)).jpg", votes: [], uploadedBy: FIRAuth.auth()!.currentUser!.uid, date: dateString, category: category)
+            "/\(Int(Date.timeIntervalSinceReferenceDate * 1000)).jpg", votes: [], uploadedBy: FIRAuth.auth()!.currentUser!.uid, date: dateString, time: timeString, category: category)
         
+        // creating object in Photos node
         let photoRef = databasePhotoReference.childByAutoId()
         let photoDetails : [String : AnyObject] = [
             "filePath" : uploadedPhoto.filePath as AnyObject,
             "date" : uploadedPhoto.date as AnyObject,
+            "time" : uploadedPhoto.time as AnyObject,
             "votes" : uploadedPhoto.votes as AnyObject,
             "uploaded" : uploadedPhoto.uploadedBy as AnyObject,
             "category" : uploadedPhoto.category as AnyObject
@@ -165,15 +168,14 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
         
         photoRef.setValue(photoDetails)
         
+        // adding the photo ID to user's photo bucket
         let userPhotoDirectory = databaseUserReference.child(FIRAuth.auth()!.currentUser!.uid).child("photos")
         let directoryAsURL = URL(string: photoRef.description())!
-//        userPhotoDirectory.setValue(directoryAsURL.lastPathComponent)
         let userPhotoDetail : [String : AnyObject ] = [
-            directoryAsURL.lastPathComponent : uploadedPhoto.date as AnyObject
+            directoryAsURL.lastPathComponent : "\(uploadedPhoto.date)-\(uploadedPhoto.time)" as AnyObject
         ]
+        
         userPhotoDirectory.updateChildValues(userPhotoDetail)
-        
-        
     }
     
     func uploadSuccess(_ metadata: FIRStorageMetadata, storagePath: String) {

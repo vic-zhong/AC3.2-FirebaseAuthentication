@@ -167,7 +167,13 @@ class PhotoViewController: UIViewController, UIImagePickerControllerDelegate, UI
         
         let userPhotoDirectory = databaseUserReference.child(FIRAuth.auth()!.currentUser!.uid).child("photos")
         let directoryAsURL = URL(string: photoRef.description())!
-        userPhotoDirectory.setValue(directoryAsURL.lastPathComponent)
+//        userPhotoDirectory.setValue(directoryAsURL.lastPathComponent)
+        let userPhotoDetail : [String : AnyObject ] = [
+            directoryAsURL.lastPathComponent : uploadedPhoto.date as AnyObject
+        ]
+        userPhotoDirectory.updateChildValues(userPhotoDetail)
+        
+        
     }
     
     func uploadSuccess(_ metadata: FIRStorageMetadata, storagePath: String) {
